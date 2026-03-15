@@ -1,0 +1,45 @@
+:root {
+  font-family: 'Space Grotesk', 'IBM Plex Sans', 'Avenir Next', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #f7f8fc;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 33, 0.12), transparent 30%),
+    linear-gradient(180deg, #05070d 0%, #090d16 42%, #06080f 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-muted: rgba(212, 220, 236, 0.74);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
