@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router';
 import { motion } from 'motion/react';
-import { Home, BarChart2, Star, User, Users, Repeat, Wallet } from 'lucide-react';
+import { Home, BarChart2, Star, User, Repeat, Wallet } from 'lucide-react';
 import { PiggyBank } from './PiggyBank';
 import { useApp } from '../context/AppContext';
 
@@ -12,7 +12,6 @@ const navItems = [
   { to: '/dca', icon: Repeat, label: 'DCA' },
   { to: '/wallet', icon: Wallet, label: 'Wallet' },
   { to: '/profile', icon: User, label: 'Profile' },
-  { to: '/referral', icon: Users, label: 'Referral' },
 ];
 
 export const DesktopSidebar: React.FC = () => {

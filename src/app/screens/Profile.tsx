@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import {
-  Copy,
-  Check,
   RefreshCw,
   ExternalLink,
 } from 'lucide-react';
@@ -27,7 +25,6 @@ export default function Profile() {
     totalFeedCount,
     streak,
     level,
-    referralCode,
     todaysFeeds,
     marketOverview,
     syncError,
@@ -50,17 +47,10 @@ export default function Profile() {
     unstakePosition,
     positionActionId,
   } = useApp();
-  const [copied, setCopied] = useState(false);
   const explorerBaseUrl =
     appEnv.starkzapNetwork === 'mainnet'
       ? 'https://voyager.online/tx/'
       : 'https://sepolia.voyager.online/tx/';
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(referralCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <div className="flex flex-col min-h-screen px-5 pt-14 pb-6 lg:px-8">
@@ -487,38 +477,6 @@ export default function Profile() {
           </SettingCard>
         </>
       )}
-
-      <SectionLabel label="Referral" />
-      <SettingCard>
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div>
-            <div className="text-white" style={{ fontWeight: 600, fontSize: 14 }}>Refer & earn</div>
-            <div className="text-white/40" style={{ fontSize: 12 }}>
-              Invite friends and get 100 XP for each friend who feeds their first piggy.
-            </div>
-          </div>
-          <div
-            className="px-2.5 py-1 rounded-full text-cyan-400"
-            style={{ background: 'rgba(34,211,238,0.12)', fontSize: 11, fontWeight: 700 }}
-          >
-            +100 XP each
-          </div>
-        </div>
-        <div
-          className="flex items-center justify-between gap-3 rounded-2xl px-4 py-3"
-          style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.06)' }}
-        >
-          <span className="text-white" style={{ fontWeight: 700, letterSpacing: '0.5px' }}>{referralCode}</span>
-          <button
-            onClick={handleCopy}
-            className="px-3 py-2 rounded-xl flex items-center gap-2 text-white"
-            style={{ background: 'linear-gradient(135deg, #F97316, #FBBF24)', fontSize: 12, fontWeight: 700 }}
-          >
-            {copied ? <Check size={14} /> : <Copy size={14} />}
-            {copied ? 'Copied' : 'Copy'}
-          </button>
-        </div>
-      </SettingCard>
     </div>
   );
 }
