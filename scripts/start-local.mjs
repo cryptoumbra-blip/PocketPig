@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { spawn } from 'node:child_process';
 import { mkdirSync, openSync } from 'node:fs';
 import { join } from 'node:path';
@@ -5,6 +6,34 @@ import { join } from 'node:path';
 const cwd = process.cwd();
 const logsDir = join(cwd, '.codex-local');
 mkdirSync(logsDir, { recursive: true });
+
+function killListeners(port) {
+  try {
+    const output = execSync(`lsof -ti tcp:${port}`, {
+      cwd,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+      .toString()
+      .trim();
+
+    if (!output) {
+      return;
+    }
+
+    for (const pid of output.split('\n').map((value) => value.trim()).filter(Boolean)) {
+      try {
+        process.kill(Number(pid), 'SIGTERM');
+      } catch {
+        // Ignore stale or foreign processes we cannot stop.
+      }
+    }
+  } catch {
+    // No listener found.
+  }
+}
+
+killListeners(3000);
+killListeners(8787);
 
 const entries = [
   {

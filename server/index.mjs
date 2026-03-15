@@ -1364,7 +1364,7 @@ async function handleSupabaseDcaSync(req, res) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+export async function handleRequest(req, res) {
   setCorsHeaders(res);
 
   if (req.method === 'OPTIONS') {
@@ -1462,8 +1462,15 @@ const server = http.createServer(async (req, res) => {
 
     sendError(res, statusCode, 'server_error', message);
   }
-});
+}
 
-server.listen(port, () => {
-  console.log(`[pocketpig-server] listening on http://localhost:${port}`);
-});
+export function createServer() {
+  return http.createServer(handleRequest);
+}
+
+if (!process.env.VERCEL) {
+  const server = createServer();
+  server.listen(port, () => {
+    console.log(`[pocketpig-server] listening on http://localhost:${port}`);
+  });
+}
